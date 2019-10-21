@@ -1,0 +1,193 @@
+
+          <button class="button btn-info" (click)="openaddModal(addpop)">Add Articles</button>&nbsp;
+
+<table class="table table-stripped">
+  <thead>
+      <th> Index</th>
+    <th>Article Id</th>
+    <th>Article Name</th>
+    <th>Created date</th>
+    <th>Category name</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of allarticles;let i=index">
+        <td>{{i+1}}</td>
+      <td>{{item.articleId}}</td>
+      <td>{{item.articleName}}</td>
+      <td>{{item.createdDate}}</td>
+      <td>{{item.categoryName}}</td>
+      <td>
+
+          <button class="button btn-primary"  (click)="openModal(template1,item)" >Edit</button>&nbsp;
+          <button class="button btn-secondary" (click)="openread(readmore,item)" >ReadMore</button>
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- edit----------------------------------------------------------------------------------------------------------------------------- -->
+<ng-template #template1>
+
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Edit</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+    <form [formGroup]="AddForm" class="container" (ngSubmit)="OnEditArticleSave(AddForm.value)">
+        <!-- <h1>ssssssyusgyusg8ssssss</h1> -->
+
+        <h4>Edit Article</h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>Article Name</b></label>
+              <input formControlName="articleName" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('articleName').hasError('required') && !AddForm.get('articleName').pristine" >articleName is required.</label>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>Content</b></label>
+              <input formControlName="content" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('content').hasError('required') && !AddForm.get('content').pristine" >content is required.</label>
+
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>CreatedBy</b></label>
+              <input formControlName="createdBy" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('createdBy').hasError('required') && !AddForm.get('createdBy').pristine" >Createdby is required.</label>
+
+            </div>
+          </div>
+        </div>
+        <div class="container">
+            <div class="row">
+              <div class="col-xs-6 col-sm-4 col-md-6">
+                <label><b>Category Name</b></label>
+                <select formControlName="categoryId" class="form-control">
+                  <option>Choose your category</option>
+                  <option *ngFor="let item of cat" [value]="item.categoryId">{{item.categoryName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <br>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default"  >Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+          </div>
+
+            </form>
+
+
+  </ng-template>
+
+<!-- ----------------------------Add Pop up ----------------------------------- -->
+  <ng-template #addpop>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="AddForm" class="container" (ngSubmit)="OnAddArticleSave(AddForm.value)">
+        <!-- <h1>ssssssyusgyusg8ssssss</h1> -->
+
+        <h4>Add Article</h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>Article Name</b></label>
+              <input formControlName="articleName" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('articleName').hasError('required') && !AddForm.get('articleName').pristine" >articleName is required.</label>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>Content</b></label>
+              <input formControlName="content" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('content').hasError('required') && !AddForm.get('content').pristine" >content is required.</label>
+
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>CreatedBy</b></label>
+              <input formControlName="createdBy" type="text" class="form-control">
+              <label class="alert alert-danger" *ngIf="AddForm.get('createdBy').hasError('required') && !AddForm.get('createdBy').pristine" >Createdby is required.</label>
+
+            </div>
+          </div>
+        </div>
+        <div class="container">
+            <div class="row">
+              <div class="col-xs-6 col-sm-4 col-md-6">
+                <label><b>Category Name</b></label>
+                <select formControlName="categoryId" class="form-control">
+                  <option>Choose your category</option>
+                  <option *ngFor="let item of cat" [value]="item.categoryId">{{item.categoryName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <br>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default"  >Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+          </div>
+
+            </form>
+
+
+  </ng-template>
+
+   <ng-template #readmore>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+          <div >
+            {{readmore?.articleName}}
+          </div>
+          <div >
+              {{readmore?.content}}
+            </div>
+            <div >
+                {{readmore?.createdBy}}
+              </div>
+              <div >
+                  {{readmore?.categoryName}}
+                </div>
+          <div class="card-body">
+            <h5 class="card-title" [innerHTML]='readmore?.content'></h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary"(click)="decline()">Close</a>
+          </div>
+
+        </div>
+
+    </ng-template>
